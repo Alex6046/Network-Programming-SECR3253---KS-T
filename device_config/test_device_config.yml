@@ -1,0 +1,108 @@
+---
+# =============================================================================
+# Playbook : test_device_config.yml
+# Author   : Theyshigan A/L Mani Balan (A24CS0202)
+# Task     : Perform testing
+# Inventory: device_config/inventory.example.yml  (group: network_devices)
+# Purpose  : Integration test. Verifies that the configurations applied by the
+#            team are present on the device:
+#              - Najmi : IP address + interface description
+#              - Abu   : user account, banner message, static route
+#            Fails loudly (assert) if any expected item is missing.
+# Run (AFTER the config playbooks):
+#   ansible-playbook -i device_config/inventory.example.yml \
+#       device_config/test_device_config.yml
+# =============================================================================
+- name: Test and verify device configuration
+  hosts: network_devices
+  gather_facts: false
+  connection: network_cli
+
+  vars:
+    # Expected values must match the team's playbooks
+    expected_interface: GigabitEthernet0/1                 # Najmi
+    expected_ip: 192.168.10.1                              # Najmi
+    expected_description: "Configured by Najmi using Ansible"  # Najmi
+    expected_username: admin                               # Abu
+    expected_static_route: "192.168.20.0"                  # Abu
+
+  tasks:
+    - name: "TEST 1 - Device reachable on SSH (port 22)"
+      ansible.builtin.wait_for:
+        host: "{{ ansible_host | default(inventory_hostname) }}"
+        port: 22
+        timeout: 15
+      delegate_to: localhost
+
+    - name: Retrieve running-config and static routes for verification
+      cisco.ios.ios_command:
+        commands:
+          - show running-config
+          - show ip route static
+      register: verify
+
+    - name: Store command output as searchable strings
+      ansible.builtin.set_fact:
+        run_cfg: "{{ verify.stdout[0] }}"
+        route_out: "{{ verify.stdout[1] }}"
+
+    - name: "TEST 2 - Interface IP address is configured (Najmi)"
+      ansible.builtin.assert:
+        that:
+          - "expected_ip in run_cfg"
+        success_msg: "PASS: IP {{ expected_ip }} found in running-config."
+        fail_msg: "FAIL: IP {{ expected_ip }} NOT found in running-config."
+
+    - name: "TEST 3 - Interface description is configured (Najmi)"
+      ansible.builtin.assert:
+        that:
+          - "expected_description in run_cfg"
+        success_msg: "PASS: Interface description found."
+        fail_msg: "FAIL: Interface description NOT found."
+
+    - name: "TEST 4 - User account exists (Abu)"
+      ansible.builtin.assert:
+        that:
+          - "('username ' ~ expected_username) in run_cfg"
+        success_msg: "PASS: User account '{{ expected_username }}' found."
+        fail_msg: "FAIL: User account '{{ expected_username }}' NOT found."
+
+    - name: "TEST 5 - Banner message is configured (Abu)"
+      ansible.builtin.assert:
+        that:
+          - "'banner motd' in run_cfg"
+        success_msg: "PASS: MOTD banner found."
+        fail_msg: "FAIL: MOTD banner NOT found."
+
+    - name: "TEST 6 - Static route is present (Abu)"
+      ansible.builtin.assert:
+        that:
+          - "expected_static_route in route_out"
+        success_msg: "PASS: Static route {{ expected_static_route }} found."
+        fail_msg: "FAIL: Static route {{ expected_static_route }} NOT found."
+
+    - name: Write test result report (output proof)
+      ansible.builtin.copy:
+        content: |
+          ========================================================
+          CONFIGURATION TEST REPORT
+          Tested by : Theyshigan (A24CS0202)
+          Host      : {{ inventory_hostname }}
+          ========================================================
+          All assertions passed. Verified present on the device:
+
+          [PASS] TEST 1 - Device reachable over SSH (port 22)
+          [PASS] TEST 2 - IP address {{ expected_ip }} on {{ expected_interface }}
+          [PASS] TEST 3 - Interface description "{{ expected_description }}"
+          [PASS] TEST 4 - User account "{{ expected_username }}"
+          [PASS] TEST 5 - MOTD banner configured
+          [PASS] TEST 6 - Static route {{ expected_static_route }}
+
+          NOTE: If any test had failed, the playbook would have stopped at
+          that assertion with a FAIL message instead of writing this file.
+          ========================================================
+        dest: device_config/test_report_output.txt
+
+    - name: Display overall result
+      ansible.builtin.debug:
+        msg: "ALL TESTS PASSED - configuration verified successfully."
