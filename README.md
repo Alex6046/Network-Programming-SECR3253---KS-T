@@ -74,6 +74,26 @@ ansible-playbook -i device_config/inventory.example.yml device_config/configure_
 
 **Before running, update `device_config/inventory.example.yml` with the real device IP address, username, password, and enable password. Update `interface_name`, `interface_ip`, and `interface_netmask` in `device_config/configure_ip_interface.yml` if the test device uses different values.**
 
+## Linux System Information Automation
+
+This script automates the collection of Linux system information.
+
+Features:
+- Display hostname
+- Display date and time
+- Display CPU information
+- Display memory usage
+- Display disk usage
+- Display logged-in users
+- Display top 5 running processes by CPU usage
+
+Run using:
+
+```bash
+chmod +x system_info.sh
+./system_info.sh
+```
+
 ## Personal Reflection Report
 Each member must prepare a 2-page personal reflection report that includes:
 
