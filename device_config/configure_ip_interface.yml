@@ -1,0 +1,30 @@
+---
+- name: Configure interface IP address and description
+  hosts: network_devices
+  gather_facts: false
+  connection: network_cli
+
+  vars:
+    interface_name: GigabitEthernet0/1
+    interface_description: Configured by Najmi using Ansible
+    interface_ip: 192.168.10.1
+    interface_netmask: 255.255.255.0
+
+  tasks:
+    - name: Configure IP address and interface description
+      cisco.ios.ios_config:
+        parents: "interface {{ interface_name }}"
+        lines:
+          - "description {{ interface_description }}"
+          - "ip address {{ interface_ip }} {{ interface_netmask }}"
+          - no shutdown
+
+    - name: Verify interface configuration
+      cisco.ios.ios_command:
+        commands:
+          - "show running-config interface {{ interface_name }}"
+      register: interface_output
+
+    - name: Display verification output
+      ansible.builtin.debug:
+        var: interface_output.stdout_lines

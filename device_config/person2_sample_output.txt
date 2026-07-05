@@ -1,0 +1,18 @@
+TASK [Verify interface configuration] *****************************************
+ok: [router1]
+
+TASK [Display verification output] ********************************************
+ok: [router1] => {
+    "interface_output.stdout_lines": [
+        [
+            "Building configuration...",
+            "Current configuration : 145 bytes",
+            "!",
+            "interface GigabitEthernet0/1",
+            " description Configured by Najmi using Ansible",
+            " ip address 192.168.10.1 255.255.255.0",
+            " no shutdown",
+            "end"
+        ]
+    ]
+}
