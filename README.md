@@ -56,7 +56,7 @@ The automation solution should be able to perform the following tasks:
 | Theyshigan | Retrieve device information and perform testing                                                   |
 | Firdaus    | Collect Linux system information                                                                  |
 
-## Najmi : IP Address and Interface Description Automation
+## IP Address and Interface Description Automation
 
 Using Ansible to configure a Cisco IOS network device interface. The playbook will set the interface description, assigns an IPv4 address, enables the interface and also will displays the running config for verification.
 
