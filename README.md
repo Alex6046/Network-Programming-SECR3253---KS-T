@@ -8,6 +8,13 @@ This project is developed for the SECR3253 Network Programming group assignment.
 
 The project focuses on automating network device configuration tasks and collecting Linux system information. It is also managed using GitHub to show collaboration and contribution from all group members.
 
+## Group Members
+•⁠  AZRY FIKRI ISKANDAR BIN ROSLAN B24CS0009
+•⁠  ⁠NAJMI HAKIN BIN SAHARIN MIZAM B24CS0031
+•⁠  ⁠ABU TALIB BIN MOHAMED RAZIK B24CS0002
+•⁠  ⁠MUHAMMAD FIRDAUS BIN MD SHAHRUNNNAHAR A24CS5031
+•⁠  ⁠THEYSHIGAN A/L MANI BALAN A24CS0202
+
 ## Assignment Requirements
 The automation solution should be able to perform the following tasks:
 
