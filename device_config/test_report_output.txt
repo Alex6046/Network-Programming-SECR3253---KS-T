@@ -1,0 +1,17 @@
+========================================================
+CONFIGURATION TEST REPORT
+Tested by : Theyshigan (A24CS0202)
+Host      : router1
+========================================================
+All assertions passed. Verified present on the device:
+
+[PASS] TEST 1 - Device reachable over SSH (port 22)
+[PASS] TEST 2 - IP address 192.168.10.1 on Loopback0
+[PASS] TEST 3 - Interface description "Configured by Najmi using Ansible"
+[PASS] TEST 4 - User account "admin"
+[PASS] TEST 5 - MOTD banner configured
+[PASS] TEST 6 - Static route 192.168.20.0
+
+NOTE: If any test had failed, the playbook would have stopped at
+that assertion with a FAIL message instead of writing this file.
+========================================================

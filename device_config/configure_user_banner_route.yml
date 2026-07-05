@@ -1,20 +1,22 @@
+---
+- name: Configure user account, banner message and static route
+  hosts: network_devices
+  gather_facts: false
+  connection: network_cli
 
-hosts: cisco
-gather_facts: no
+  tasks:
+    - name: Configure user account
+      cisco.ios.ios_config:
+        lines:
+          - username admin privilege 15 secret Admin123!
 
+    - name: Configure banner message
+      cisco.ios.ios_banner:
+        banner: motd
+        text: Unauthorized access is prohibited!
+        state: present
 
--name: Configure user account
-	cisco.ios.ios_config: 
-	lines:
-	-username admin privilege 15 secret Admin123!
-
--name: Configure banner message
-	cisco.ios.ios_config:
-	lines:
-	-banner motd ^CUnauthorized access is prohibited!^C
-
--name: Configure static route
-	cisco.ios.ios_config:
-	lines:
-	-ip route 192.168.20.0 255.255.255.0 192.168.56.1
-
+    - name: Configure static route
+      cisco.ios.ios_config:
+        lines:
+          - ip route 192.168.20.0 255.255.255.0 192.168.56.1

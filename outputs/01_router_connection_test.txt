@@ -1,0 +1,13 @@
+router1 | SUCCESS => {
+    "changed": false,
+    "stdout": [
+        "Interface              IP-Address      OK? Method Status                Protocol\nGigabitEthernet1       192.168.56.101  YES DHCP   up                    up      \nLoopback0              192.168.10.1    YES manual up                    up"
+    ],
+    "stdout_lines": [
+        [
+            "Interface              IP-Address      OK? Method Status                Protocol",
+            "GigabitEthernet1       192.168.56.101  YES DHCP   up                    up      ",
+            "Loopback0              192.168.10.1    YES manual up                    up"
+        ]
+    ]
+}

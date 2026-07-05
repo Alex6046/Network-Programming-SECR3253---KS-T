@@ -20,7 +20,7 @@
 
   vars:
     # Expected values must match the team's playbooks
-    expected_interface: GigabitEthernet0/1                 # Najmi
+    expected_interface: Loopback0                 # Najmi
     expected_ip: 192.168.10.1                              # Najmi
     expected_description: "Configured by Najmi using Ansible"  # Najmi
     expected_username: admin                               # Abu
