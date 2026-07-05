@@ -1,0 +1,9 @@
+services:
+  network-automation:
+    build: .
+    container_name: network_automation_project
+    working_dir: /app
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/app
