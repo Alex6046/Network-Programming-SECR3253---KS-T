@@ -1,0 +1,16 @@
+
+PLAY [Configure user account, banner message and static route] *****************
+
+TASK [Configure user account] **************************************************
+[WARNING]: To ensure idempotency and correct diff the input configuration lines should be similar to how they appear if present in the running configuration on device
+changed: [router1]
+
+TASK [Configure banner message] ************************************************
+ok: [router1]
+
+TASK [Configure static route] **************************************************
+ok: [router1]
+
+PLAY RECAP *********************************************************************
+router1                    : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

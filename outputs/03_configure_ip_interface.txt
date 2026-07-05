@@ -1,0 +1,29 @@
+
+PLAY [Configure interface IP address and description] **************************
+
+TASK [Configure IP address and interface description] **************************
+[WARNING]: To ensure idempotency and correct diff the input configuration lines should be similar to how they appear if present in the running configuration on device
+changed: [router1]
+
+TASK [Verify interface configuration] ******************************************
+ok: [router1]
+
+TASK [Display verification output] *********************************************
+ok: [router1] => {
+    "interface_output.stdout_lines": [
+        [
+            "Building configuration...",
+            "",
+            "Current configuration : 113 bytes",
+            "!",
+            "interface Loopback0",
+            " description Configured by Najmi using Ansible",
+            " ip address 192.168.10.1 255.255.255.0",
+            "end"
+        ]
+    ]
+}
+
+PLAY RECAP *********************************************************************
+router1                    : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

@@ -5,7 +5,7 @@
   connection: network_cli
 
   vars:
-    interface_name: GigabitEthernet0/1
+    interface_name: Loopback0
     interface_description: Configured by Najmi using Ansible
     interface_ip: 192.168.10.1
     interface_netmask: 255.255.255.0

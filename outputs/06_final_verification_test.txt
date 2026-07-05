@@ -1,0 +1,53 @@
+
+PLAY [Test and verify device configuration] ************************************
+
+TASK [TEST 1 - Device reachable on SSH (port 22)] ******************************
+ok: [router1 -> localhost]
+
+TASK [Retrieve running-config and static routes for verification] **************
+ok: [router1]
+
+TASK [Store command output as searchable strings] ******************************
+ok: [router1]
+
+TASK [TEST 2 - Interface IP address is configured (Najmi)] *********************
+ok: [router1] => {
+    "changed": false,
+    "msg": "PASS: IP 192.168.10.1 found in running-config."
+}
+
+TASK [TEST 3 - Interface description is configured (Najmi)] ********************
+ok: [router1] => {
+    "changed": false,
+    "msg": "PASS: Interface description found."
+}
+
+TASK [TEST 4 - User account exists (Abu)] **************************************
+ok: [router1] => {
+    "changed": false,
+    "msg": "PASS: User account 'admin' found."
+}
+
+TASK [TEST 5 - Banner message is configured (Abu)] *****************************
+ok: [router1] => {
+    "changed": false,
+    "msg": "PASS: MOTD banner found."
+}
+
+TASK [TEST 6 - Static route is present (Abu)] **********************************
+ok: [router1] => {
+    "changed": false,
+    "msg": "PASS: Static route 192.168.20.0 found."
+}
+
+TASK [Write test result report (output proof)] *********************************
+ok: [router1]
+
+TASK [Display overall result] **************************************************
+ok: [router1] => {
+    "msg": "ALL TESTS PASSED - configuration verified successfully."
+}
+
+PLAY RECAP *********************************************************************
+router1                    : ok=10   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
