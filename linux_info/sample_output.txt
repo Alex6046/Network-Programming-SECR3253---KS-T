@@ -1,0 +1,31 @@
+
+      LINUX SYSTEM INFORMATION REPORT     
+
+HOSTNAME:
+labvm
+
+DATE AND TIME:
+Sun 05 Jul 2026 03:42:05 PM UTC
+
+CPU INFORMATION:
+Model name:                      13th Gen Intel(R) Core(TM) i5-13400F
+
+MEMORY USAGE:
+              total        used        free      shared  buff/cache   available
+Mem:          3.8Gi       591Mi       2.4Gi        19Mi       931Mi       3.0Gi
+Swap:         2.0Gi          0B       2.0Gi
+
+DISK USAGE:
+total            41G   18G   21G  46% -
+
+LOGGED-IN USERS:
+devasc   tty7         2026-07-05 15:38 (:0)
+
+TOP 5 RUNNING PROCESSES (BY CPU %):
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root        2269  2.1  2.9 655760 119852 tty7    Ssl+ 15:38   0:04 /usr/lib/xorg/Xorg -core :0 -seat seat0 -auth /var/run/lightdm/root/:0 -nolisten tcp vt7 -novtswitch
+devasc      2689  1.7  2.7 1544064 109188 ?      Sl   15:38   0:03 /usr/bin/caja
+root           1  0.8  0.2 168236 11640 ?        Ss   15:38   0:02 /sbin/init
+root        1936  0.5  0.8 121504 35884 ?        Sl   15:38   0:01 /opt/API-SIMULATOR/venv/bin/python api-simulator.py
+devasc      2702  0.5  0.6 413996 25308 ?        Sl   15:38   0:01 /usr/lib/mate-applets/mate-multiload-applet
+==========================================
