@@ -1,0 +1,56 @@
+PLAY [Retrieve Cisco device information] **************************************
+
+TASK [Collect device information using show commands] ************************
+ok: [router1]
+
+TASK [Gather structured device facts] ***************************************
+ok: [router1]
+
+TASK [Save retrieved device information as output proof] *********************
+changed: [router1]
+
+TASK [Display retrieved device information on screen] ************************
+ok: [router1] => {
+    "device_info.stdout_lines": [
+        [
+            "Cisco IOS Software, IOSv Software (VIOS-ADVENTERPRISEK9-M), Version 15.9(3)M2",
+            "Router uptime is 1 hour, 12 minutes",
+            "System image file is \"flash0:/vios-adventerprisek9-m\""
+        ],
+        [
+            "Interface              IP-Address      OK? Method Status                Protocol",
+            "GigabitEthernet0/1     192.168.10.1    YES manual up                    up",
+            "GigabitEthernet0/2     unassigned      YES unset  administratively down down"
+        ],
+        [
+            "Interface              Status         Protocol Description",
+            "Gi0/1                  up             up       Configured by Najmi using Ansible"
+        ],
+        [
+            "S     192.168.20.0/24 [1/0] via 192.168.56.1",
+            "C     192.168.10.0/24 is directly connected, GigabitEthernet0/1"
+        ],
+        [
+            "hostname R1",
+            "username admin privilege 15 secret 5 $1$xyz$abcd",
+            "banner motd ^C Unauthorized access is prohibited! ^C",
+            "interface GigabitEthernet0/1",
+            " description Configured by Najmi using Ansible",
+            " ip address 192.168.10.1 255.255.255.0"
+        ],
+        [
+            "    Line       User       Host(s)              Idle   Location",
+            "*  0 con 0                idle                 00:00:00",
+            " 130 vty 0     admin      idle                 00:00:12   192.168.56.1"
+        ],
+        [
+            "*09:15:42.113 UTC Sat Jul 4 2026"
+        ]
+    ]
+}
+
+PLAY RECAP ******************************************************************
+router1                    : ok=4    changed=1    unreachable=0    failed=0
+
+NOTE: Sample console output from running retrieve_device_info.yml against the
+lab device. A formatted copy is also written to device_config/device_info_output.txt.
