@@ -29,3 +29,13 @@ echo ""
 echo "DISK USAGE:"
 df -h --total | grep "total"
 echo ""
+
+# 6. Display logged-in users
+echo "LOGGED-IN USERS:"
+who
+echo ""
+
+# 7. Display top 5 running processes by CPU usage
+echo "TOP 5 RUNNING PROCESSES (BY CPU %):"
+ps aux --sort=-%cpu | head -n 6
+echo "=========================================="
