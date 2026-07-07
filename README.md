@@ -1,12 +1,22 @@
 # SECR3253 Network Programming Group Assignment
 
 ## Project Title
+
 Network Automation and Linux System Information Project
 
-## Project Overview
-This project is developed for the SECR3253 Network Programming group assignment. The main purpose of this project is to create a small automation solution using Docker, Ansible, NETCONF, or related automation tools.
+## Overview
 
-The project focuses on automating network device configuration tasks and collecting Linux system information. It is also managed using GitHub to show collaboration and contribution from all group members.
+This repository contains a Docker-based automation project for SECR3253 Network Programming. It uses Ansible to configure and verify a Cisco IOS network device, and a Linux shell script to collect system information.
+
+Main automation tasks:
+
+- Configure Cisco IOS interface IP address and description
+- Configure Cisco IOS user account
+- Configure Cisco IOS MOTD banner
+- Configure Cisco IOS static route
+- Retrieve Cisco IOS device information
+- Verify applied device configuration
+- Collect Linux system information
 
 ## Group Members
 
@@ -18,96 +28,187 @@ The project focuses on automating network device configuration tasks and collect
 | 4 | MUHAMMAD FIRDAUS BIN MD SHAHRUNNNAHAR | A24CS5031 |
 | 5 | THEYSHIGAN A/L MANI BALAN | A24CS0202 |
 
-## Assignment Requirements
-The automation solution should be able to perform the following tasks:
-
-### Device Configuration Tasks
-•⁠  ⁠Configure IP address
-•⁠  ⁠Configure user account
-•⁠  ⁠Configure banner message
-•⁠  ⁠Configure interface description
-•⁠  ⁠Configure static route
-•⁠  ⁠Retrieve device information
-
-### Linux System Information Tasks
-•⁠  ⁠Display hostname
-•⁠  ⁠Display current date and time
-•⁠  ⁠Display CPU information
-•⁠  ⁠Display memory usage
-•⁠  ⁠Display disk usage
-•⁠  ⁠Display logged-in users
-•⁠  ⁠Display top 5 running processes by CPU usage
-
 ## Tools Used
-•⁠  ⁠GitHub / Git
-•⁠  ⁠Docker
-•⁠  ⁠Docker Compose
-•⁠  ⁠Ansible
-•⁠  ⁠NETCONF / Python
-•⁠  ⁠Linux Shell Script
 
-## Group Task Division
+- Git and GitHub
+- Docker
+- Docker Compose
+- Ansible
+- Cisco IOS Ansible collection
+- Linux shell script
 
-| Member     | Responsibility                                                                                    |
-| ---        | ---                                                                                               |
-| Azry       | Project setup, GitHub repository, Docker environment, README documentation, and final integration |
-| Najmi      | Configure IP address and interface description automation                                         |
-| Abu        | Configure user account, banner message, and static route automation                               |
-| Theyshigan | Retrieve device information and perform testing                                                   |
-| Firdaus    | Collect Linux system information                                                                  |
+## Repository Structure
 
-## IP Address and Interface Description Automation
+```text
+.
+├── Dockerfile
+├── docker-compose.yml
+├── run_all.sh
+├── README.md
+├── device_config/
+│   ├── inventory.example.yml
+│   ├── configure_ip_interface.yml
+│   ├── configure_user_banner_route.yml
+│   ├── retrieve_device_info.yml
+│   ├── test_device_config.yml
+│   ├── TESTING.md
+│   ├── device_info_output.txt
+│   ├── test_report_output.txt
+│   ├── person2_sample_output.txt
+│   └── person5_sample_output.txt
+├── linux_info/
+│   ├── system_info.sh
+│   └── sample_output.txt
+└── outputs/
+    ├── 00_ansible_version.txt
+    ├── 01_router_connection_test.txt
+    ├── 02_linux_system_info.txt
+    ├── 03_configure_ip_interface.txt
+    ├── 04_configure_user_banner_route.txt
+    ├── 05_retrieve_device_info.txt
+    └── 06_final_verification_test.txt
+```
 
-Using Ansible to configure a Cisco IOS network device interface. The playbook will set the interface description, assigns an IPv4 address, enables the interface and also will displays the running config for verification.
+## Task Division
 
-Files:
-- `device_config/configure_ip_interface.yml`
-- `device_config/inventory.example.yml`
-- `device_config/person2_sample_output.txt`
+| Member | Responsibility |
+| --- | --- |
+| Azry | Project setup, GitHub repository, Docker environment, README documentation, final integration |
+| Najmi | Configure IP address and interface description automation |
+| Abu | Configure user account, banner message, and static route automation |
+| Theyshigan | Retrieve device information and perform testing |
+| Firdaus | Collect Linux system information |
 
-Run command:
+## Configuration Files
+
+### `device_config/inventory.example.yml`
+
+Shared Ansible inventory for Cisco IOS device connection.
+
+Default values:
+
+- Host: `router1`
+- Device IP: `192.168.56.101`
+- Username: `cisco`
+- Password: `cisco123!`
+- Enable password: `cisco`
+- Connection: `ansible.netcommon.network_cli`
+- Network OS: `cisco.ios.ios`
+
+Update this file before running if device IP address or login details are different.
+
+### `device_config/configure_ip_interface.yml`
+
+Configures `Loopback0` with:
+
+- Description: `Configured by Najmi using Ansible`
+- IP address: `192.168.10.1`
+- Netmask: `255.255.255.0`
+
+### `device_config/configure_user_banner_route.yml`
+
+Configures:
+
+- User account: `admin`
+- MOTD banner: `Unauthorized access is prohibited!`
+- Static route: `192.168.20.0/24` via `192.168.56.1`
+
+### `device_config/retrieve_device_info.yml`
+
+Retrieves device information using Cisco IOS show commands and writes report to:
+
+- `device_config/device_info_output.txt`
+
+### `device_config/test_device_config.yml`
+
+Verifies device configuration with Ansible assertions and writes report to:
+
+- `device_config/test_report_output.txt`
+
+### `linux_info/system_info.sh`
+
+Collects Linux system information:
+
+- Hostname
+- Date and time
+- CPU information
+- Memory usage
+- Disk usage
+- Logged-in users
+- Top 5 processes by CPU usage
+
+## How To Run
+
+Requirements:
+
+- Git
+- Docker
+- Cisco IOS device reachable from host machine
+- Correct credentials in `device_config/inventory.example.yml`
+
+Run all tasks from fresh clone:
 
 ```bash
-ansible-galaxy collection install cisco.ios
+git clone this repo
+cd Network-Programming-SECR3253---KS-T
+chmod +x run_all.sh
+./run_all.sh
+```
+
+Replace `this repo` with actual GitHub repository URL.
+
+The `run_all.sh` script will:
+
+1. Build Docker image `network-automation`
+2. Start container with project folder mounted at `/app`
+3. Install/check required Ansible and Paramiko setup
+4. Test router connectivity
+5. Run Linux system information script
+6. Run all Cisco IOS configuration playbooks
+7. Retrieve device information
+8. Run final verification tests
+9. Save command outputs in `outputs/`
+
+## Output Proof
+
+After successful run, output files are saved in:
+
+- `outputs/00_ansible_version.txt`
+- `outputs/01_router_connection_test.txt`
+- `outputs/02_linux_system_info.txt`
+- `outputs/03_configure_ip_interface.txt`
+- `outputs/04_configure_user_banner_route.txt`
+- `outputs/05_retrieve_device_info.txt`
+- `outputs/06_final_verification_test.txt`
+- `linux_info/sample_output.txt`
+- `device_config/device_info_output.txt`
+- `device_config/test_report_output.txt`
+
+## Manual Run Commands
+
+If running playbooks manually inside prepared environment:
+
+```bash
+ansible --version
+ansible network_devices -i device_config/inventory.example.yml -m cisco.ios.ios_command -a "commands='show ip interface brief'"
+bash linux_info/system_info.sh
 ansible-playbook -i device_config/inventory.example.yml device_config/configure_ip_interface.yml
+ansible-playbook -i device_config/inventory.example.yml device_config/configure_user_banner_route.yml
+ansible-playbook -i device_config/inventory.example.yml device_config/retrieve_device_info.yml
+ansible-playbook -i device_config/inventory.example.yml device_config/test_device_config.yml
 ```
-
-**Before running, update `device_config/inventory.example.yml` with the real device IP address, username, password, and enable password. Update `interface_name`, `interface_ip`, and `interface_netmask` in `device_config/configure_ip_interface.yml` if the test device uses different values.**
-
-## Linux System Information Automation
-
-This script automates the collection of Linux system information.
-
-Features:
-- Display hostname
-- Display date and time
-- Display CPU information
-- Display memory usage
-- Display disk usage
-- Display logged-in users
-- Display top 5 running processes by CPU usage
-
-Run using:
-
-```bash
-chmod +x system_info.sh
-./system_info.sh
-```
-
-## Personal Reflection Report
-Each member must prepare a 2-page personal reflection report that includes:
-
-1. Contribution to the project
-2. Challenges encountered during collaboration
-3. Lessons learned from the project
 
 ## Final Deliverables
-- GitHub Repository URL
-- Completed automation project
+
+- GitHub repository
+- Docker-based automation project
+- Ansible device configuration playbooks
+- Linux system information script
+- Output proof files
 - README documentation
 - GitHub commit history from all members
-- Screenshots or output proof
 - Personal reflection report from each member
 
 ## Deadline
+
 Submission deadline: 6 July 2026, 9:00 AM
