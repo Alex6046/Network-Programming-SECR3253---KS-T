@@ -149,13 +149,11 @@ Requirements:
 Run all tasks from fresh clone:
 
 ```bash
-git clone this repo
+git clone https://github.com/Alex6046/Network-Programming-SECR3253---KS-T.git
 cd Network-Programming-SECR3253---KS-T
 chmod +x run_all.sh
 ./run_all.sh
 ```
-
-Replace `this repo` with actual GitHub repository URL.
 
 The `run_all.sh` script will:
 
