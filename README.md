@@ -117,7 +117,7 @@ Configures:
 
 Retrieves device information using Cisco IOS show commands and writes report to:
 
-- `device_config/device_info_output.txt`
+- `outputs/device_info_output.txt`
 
 ### `device_config/test_device_config.yml`
 
