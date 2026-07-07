@@ -178,9 +178,6 @@ After successful run, output files are saved in:
 - `outputs/04_configure_user_banner_route.txt`
 - `outputs/05_retrieve_device_info.txt`
 - `outputs/06_final_verification_test.txt`
-- `linux_info/sample_output.txt`
-- `device_config/device_info_output.txt`
-- `device_config/test_report_output.txt`
 
 ## Manual Run Commands
 
@@ -209,4 +206,4 @@ ansible-playbook -i device_config/inventory.example.yml device_config/test_devic
 
 ## Deadline
 
-Submission deadline: 6 July 2026, 9:00 AM
+Submission deadline: 7 July 2026, 9:00 AM
